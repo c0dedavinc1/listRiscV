@@ -46,6 +46,7 @@ test_emptylist:
     
     li a0, 0 # expected result
     mv a1, t1 # the result
+    li a2, 97 # the identifier of the test
     
     addi sp, sp, -4 # protocol for a nested function call
     sw ra, (0)sp   
@@ -55,7 +56,18 @@ test_emptylist:
     
     jr ra
     
+    
+
+# a0: expected result, integer
+# a1: result, integer
+# a2: test ID
 print_test:
+    mv t0, a0 # I must save a0, it will be used in system calls
+    
+    li a7, 11
+    mv a0, a2
+    ecall
+    
     li a7, 11 # preparing output for system call (print char)
     li a0, 84
     ecall
@@ -73,7 +85,7 @@ print_test:
     ecall
     
     li a7, 11 
-    li a0, 32
+    li a0, 95
     ecall
     
     li a7, 1
@@ -81,7 +93,45 @@ print_test:
     addi s1, s1, 1
     ecall
         
-  
+    li a7, 11 
+    li a0, 40
+    ecall
+
+    li a7, 11 
+    li a0, 101
+    ecall
+    
+    li a7, 11 
+    li a0, 58
+    ecall 
+    
+    li a7, 1
+    mv a0, t0
+    ecall
+    
+    li a7, 11
+    li a0, 44
+    ecall    
+    
+    li a7, 11
+    li a0, 32
+    ecall
+    
+    li a7, 11
+    li a0 114
+    ecall
+    
+    li a7, 11
+    li a0, 58
+    ecall 
+    
+    li a7, 1
+    mv a0, a1
+    ecall
+    
+    li a7, 11
+    li a0, 41
+    ecall
   
     li a7, 11 # new line
     li a0, 10
