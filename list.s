@@ -38,6 +38,7 @@ read_next_command:
         bne t0, t1, rdc_reading_null_end
         # if i'm not reading a null space, go on 
         addi s3, s3, 1 # read the next character
+        j rdc_reading_null
     rdc_reading_null_end:
     # at this point I will have the first character of the command just read
     # remember the list of commands: 
@@ -87,8 +88,8 @@ test_rnc_1:
     lw ra, (0)sp
     addi sp, sp, 4
     # at this point we know that s3 need to be 2
-    mv a1, a0 # we save the actual result
-    mv a0, s3
+    li a0, 2
+    mv a1, s3
     li a2, 114 # the test is identified with r
     
     addi sp, sp, -4 
