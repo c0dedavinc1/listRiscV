@@ -19,7 +19,8 @@ main:
     
     li s3, 0 # s3 is the index of actual the character read by the program
     
-    jal read_next_command
+    # we have to test if the read next command can read void
+    jal test_rnc_1
     
     
     
@@ -30,13 +31,18 @@ main:
 
 read_next_command:
     # reading the first null space
-    add s4, s4, s3 # i start from I stopped the last reading 
-    lb t0, (0)s4
     li t1, 32 # the null space is 32 in integer (ASCII table)
     rdc_reading_null:
+        add s4, s4, s3 # i start from I stopped the last reading 
+        lb t0, (0)s4
         bne t0, t1, rdc_reading_null_end
-    
+        # if i'm not reading a null space, go on 
+        addi s3, s3, 1 # read the next character
     rdc_reading_null_end:
+    # at this point I will have the first character of the command just read
+    # remember the list of commands: 
+    # add, del, print, sort, rev, sdx, ssx
+        
     jr ra
 
 add:
@@ -73,7 +79,25 @@ test_emptylist:
     
     jr ra
     
-test_readCommand:
+test_rnc_1:
+    # first we need to save the ra
+    addi sp, sp, -4
+    sw ra, (0)sp
+    jal read_next_command
+    lw ra, (0)sp
+    addi sp, sp, 4
+    # at this point we know that s3 need to be 2
+    mv a1, a0 # we save the actual result
+    mv a0, s3
+    li a2, 114 # the test is identified with r
+    
+    addi sp, sp, -4 
+    sw ra, (0)sp
+    jal print_test
+    lw ra, (0)sp
+    addi sp, sp, 4
+    
+    jr ra
     
     
 # a0: expected result, integer
