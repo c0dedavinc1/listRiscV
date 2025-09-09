@@ -1,11 +1,12 @@
 .data
 
-testProf1: .string "ADD(1) ~ ADD(a) ~ ADD(a) ~ ADD(B) ~ ADD(;) ~ ADD(9) ~SORT~PRINT~DEL(b) ~DEL(B)~PRI~REV~PRINT"
+testProf1: .string "  ADD(1) ~ ADD(a) ~ ADD(a) ~ ADD(B) ~ ADD(;) ~ ADD(9) ~SORT~PRINT~DEL(b) ~DEL(B)~PRI~REV~PRINT"
 testProf2: .string "ADD(1) ~ ADD(a) ~ add(B) ~ ADD(B) ~ ADD ~ ADD(9) ~PRINT~SORT(a)~PRINT~DEL(bb) ~DEL(B) ~PRINT~REV~PRINT"
 testAdd: .string ""
 
 .text
 li s1, 1 # number of test 
+la s4, testProf1 # loading the command string
 main:
     # I create the list 
     li s0, 0x10000000000
@@ -14,6 +15,11 @@ main:
     sw t0, (1)s0
     
     jal test_emptylist
+    # and test it
+    
+    li s3, 0 # s3 is the index of actual the character read by the program
+    
+    jal read_next_command
     
     
     
@@ -21,6 +27,17 @@ main:
     li a7, 10
     ecall
     
+
+read_next_command:
+    # reading the first null space
+    add s4, s4, s3 # i start from I stopped the last reading 
+    lb t0, (0)s4
+    li t1, 32 # the null space is 32 in integer (ASCII table)
+    rdc_reading_null:
+        bne t0, t1, rdc_reading_null_end
+    
+    rdc_reading_null_end:
+    jr ra
 
 add:
     
@@ -46,7 +63,7 @@ test_emptylist:
     
     li a0, 0 # expected result
     mv a1, t1 # the result
-    li a2, 97 # the identifier of the test
+    li a2, 97 # the identifier of the test (a)
     
     addi sp, sp, -4 # protocol for a nested function call
     sw ra, (0)sp   
@@ -56,8 +73,9 @@ test_emptylist:
     
     jr ra
     
+test_readCommand:
     
-
+    
 # a0: expected result, integer
 # a1: result, integer
 # a2: test ID
