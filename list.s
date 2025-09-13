@@ -1,5 +1,4 @@
 .data
-
 testProf1: .string "  ADD(1) ~ ADD(a) ~ ADD(a) ~ ADD(B) ~ ADD(;) ~ ADD(9) ~SORT~PRINT~DEL(b) ~DEL(B)~PRI~REV~PRINT"
 testProf2: .string "ADD(1) ~ ADD(a) ~ add(B) ~ ADD(B) ~ ADD ~ ADD(9) ~PRINT~SORT(a)~PRINT~DEL(bb) ~DEL(B) ~PRINT~REV~PRINT"
 testAdd: .string ""
@@ -7,9 +6,18 @@ testAdd: .string ""
 .text
 li s1, 1 # number of test 
 la s4, testProf1 # loading the command string
+
 main:
     # I create the list 
     li s0, 0x10000000000
+    li s2, 0x11000000000 # this will be ad address of an array with the rolling hash of every command
+    
+    addi sp, sp, -4
+    sw ra, (0)sp
+    jal setup_rollinghashvect
+    lw ra, (0)sp
+    addi sp, sp, 4
+    
     li t0, 0
     sb t0, (0)s0
     sw t0, (1)s0
@@ -21,13 +29,10 @@ main:
     
     # we have to test if the read next command can read void
     jal test_rnc_1
-    
-    
-    
+     
     # Terminate program 
     li a7, 10
     ecall
-    
 
 read_next_command:
     # reading the first null space
@@ -43,7 +48,32 @@ read_next_command:
     # at this point I will have the first character of the command just read
     # remember the list of commands: 
     # add, del, print, sort, rev, sdx, ssx
-        
+    
+    # command reading stops with (an empty space) or a parentesis
+    
+    end_commands:
+    
+    # if the command have wrong sintax we read until the
+    # the next tilde    
+    jr ra
+  
+setup_rollinghashvect:
+    li t0, 4936 # rolling hash di PRINT
+    sw t0, (0)s2
+    li t0, 
+    sw t0, (4)s2
+    li t0, 
+    sw t0, (4)s2
+    li t0, 
+    sw t0, (4)s2
+    li t0, 
+    sw t0, (4)s2
+    li t0, 
+    sw t0, (4)s2
+    li t0, 
+    sw t0, (4)s2
+    li t0, 
+    
     jr ra
 
 add:
@@ -59,6 +89,7 @@ rev:
 sdx:
     
 ssx:
+    
               
 # suite test
 
