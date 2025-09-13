@@ -60,20 +60,18 @@ read_next_command:
 setup_rollinghashvect:
     li t0, 4936 # rolling hash di PRINT
     sw t0, (0)s2
-    li t0, 
+    li t0, 928 # ADD
     sw t0, (4)s2
-    li t0, 
-    sw t0, (4)s2
-    li t0, 
-    sw t0, (4)s2
-    li t0, 
-    sw t0, (4)s2
-    li t0, 
-    sw t0, (4)s2
-    li t0, 
-    sw t0, (4)s2
-    li t0, 
-    
+    li t0, 972 # DEL
+    sw t0, (8)s2
+    li t0, 1104 # REV
+    sw t0, (12)s2
+    li t0, 1172 # SSX
+    sw t0, (16)s2
+    li t0, 1112 # SDX
+    sw t0, (20)s2
+    li t0, 2456 # SORT
+    sw t0, (24)s2
     jr ra
 
 add:
