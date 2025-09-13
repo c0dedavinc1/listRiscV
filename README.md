@@ -1,7 +1,14 @@
 # listRiscV
 a project that creates a list and updates it with some command in RISC-V
 
-
+# Task
+- [ ] Completing the test identifiers table
+- [ ] Writing about the functions in the program
+- [ ] Making a flowchart about the functions
+- [ ]
+- [ ]
+- [ ]
+- [ ]
 
 # test identifiers
 | ID      | test           | 
