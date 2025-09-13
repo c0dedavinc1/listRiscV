@@ -14,6 +14,11 @@ a project that creates a list and updates it with some command in RISC-V
 # Rolling hash (in this project)
 
 $$ R = (R + Dec(l)) << 2 $$ 
+For every l, letter, in the command.
+
+In math terms we would write
+$$ sum_{i=0}^n-1 r_i =  $$
+n the length of the command
 
 # Project-useful ASCII table
 
