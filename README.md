@@ -11,6 +11,10 @@ a project that creates a list and updates it with some command in RISC-V
 |  |       |   
 
 
+# Rolling hash (in this project)
+
+R = (R + Dec(l)) << 2 
+
 # Project-useful ASCII table
 
 # ASCII Table (DEC 32–127)
