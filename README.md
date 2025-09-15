@@ -1,5 +1,7 @@
-# listRiscV
+# LIST RISC V
 a project that creates a list and updates it with some command in RISC-V
+
+[[_TOC_]]
 
 # Task
 started in 13/09/2025
@@ -127,3 +129,5 @@ n the length of the command
 | 125 | 175 | 7D  | 01111101 | }      | &#125;      | &rcub;    | Closing brace                        |
 | 126 | 176 | 7E  | 01111110 | ~      | &#126;      | &tilde;   | Equivalency sign - tilde             |
 | 127 | 177 | 7F  | 01111111 | DEL    | &#127;      |           | Delete                               |
+
+# 
