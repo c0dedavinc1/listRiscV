@@ -22,6 +22,7 @@ started in 13/09/2025
 # Rolling hash (in this project)
 
 $$ R = (R + Dec(l)) << 2 $$ 
+
 For every l, letter, in the command.
 
 In math terms we would write
