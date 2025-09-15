@@ -13,7 +13,15 @@ started in 13/09/2025
 - [ ] Checking again the rolling hash calculations
 
 # Rolling_hash_table
-
+| COMMAND      | Rolling hash           | 
+| ------------- |:-------------:| 
+| PRINT     | 4936 | 
+|   ADD    |    928   |   
+|  DEL |    972     |
+|  REV |   1104    |
+|  SSX|    1172    |
+|  SDX |   1112    |
+| SORT  |   2456    |
 
 
 # test identifiers
