@@ -1,7 +1,7 @@
 # LIST RISC V
 a project that creates a list and updates it with some command in RISC-V
 
-[[_TOC_]]
+[[TOC]]
 
 # Task
 started in 13/09/2025
