@@ -1,9 +1,10 @@
 # LIST RISC V
 a project that creates a list and updates it with some command in RISC-V
 
-[[TOC]]
+# Table of contents
+- [Task](#Task)
 
-# Task
+#Task
 started in 13/09/2025
 - [ ] Completing the test identifiers table
 - [ ] Writing about the functions in the program
