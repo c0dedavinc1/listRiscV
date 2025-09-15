@@ -26,7 +26,9 @@ $$ R = (R + Dec(l)) << 2 $$
 For every l, letter, in the command.
 
 In math terms we would write
+
 $$ sum_{i=0}^n-1 r_i =  $$
+
 n the length of the command
 
 # Project-useful ASCII table
