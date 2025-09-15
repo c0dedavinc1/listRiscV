@@ -3,7 +3,7 @@ a project that creates a list and updates it with some command in RISC-V
 
 # Table of contents
 - [Task](#Task)
-- [Rolling hash](#Rollinghashtable)
+- [Rolling hash](#Rolling_hash_table)
 
 # Task
 started in 13/09/2025
@@ -12,7 +12,7 @@ started in 13/09/2025
 - [ ] Making a flowchart about the functions
 - [ ] Checking again the rolling hash calculations
 
-# Rolling hash table
+# Rolling_hash_table
 
 
 
