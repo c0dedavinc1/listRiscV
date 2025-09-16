@@ -5,6 +5,19 @@ a project that creates a list and updates it with some command in RISC-V
 - [Task](#Task)
 - [Rolling hash](#Rolling_hash_table)
 
+# Read the next command
+- Reads all the empty space before the command 
+- Reads the command, or jumps it (if it isn't well-written); execute.
+- Read until the next tilde.
+  
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
 # Task
 started in 13/09/2025
 - [ ] Completing the test identifiers table
