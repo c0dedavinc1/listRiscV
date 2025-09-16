@@ -1,11 +1,11 @@
 .data
 testProf1: .string "  ADD(1) ~ ADD(a) ~ ADD(a) ~ ADD(B) ~ ADD(;) ~ ADD(9) ~SORT~PRINT~DEL(b) ~DEL(B)~PRI~REV~PRINT"
 testProf2: .string "ADD(1) ~ ADD(a) ~ add(B) ~ ADD(B) ~ ADD ~ ADD(9) ~PRINT~SORT(a)~PRINT~DEL(bb) ~DEL(B) ~PRINT~REV~PRINT"
-testAdd: .string ""
+testAdd: .string "ADD(B)"
+testVoid: .string " "
 
 .text
 li s1, 1 # number of test 
-la s4, testProf1 # loading the command string
 
 main:
     # I create the list 
@@ -25,15 +25,25 @@ main:
     jal test_emptylist
     # and test it
     
+    la s4, testVoid # 
+    
     li s3, 0 # s3 is the index of actual the character read by the program
     
     # we have to test if the read next command can read void
     jal test_rnc_1
+    
+    la s4, testAdd # loading the command string
+    
+    # The last part, when all the test are ok
+    # will be executing the two test that are passed.
+    
+    
      
     # Terminate program 
     li a7, 10
     ecall
 
+# This command will be insert in a for until the string is endend
 read_next_command:
     # reading the first null space
     li t1, 32 # the null space is 32 in integer (ASCII table)
@@ -50,11 +60,36 @@ read_next_command:
     # add, del, print, sort, rev, sdx, ssx
     
     # command reading stops with (an empty space) or a parentesis
+    # then I'll have where it starts the command and where
+    # it ends. I will control the command before, then the
+    # parenthesis (obv if the command have it)
+    
+    # t0:
+    # t1:
+    # t2: = s3
+    # t3: to decide when the rdc until... stops
+        
+    mv t2, s3
+    # the for stops also with a parenthesis
+    rdc_until_empty_space:
+        beq t0, t1, end_rdc_until_empty_space
+        
+        j rdc_until_empty_space
+    end_rdc_until_empty_space:
+        
+    # checks if the command syntax     
+    command_hash:
+           
+    command_execute:
     
     end_commands:
-    
+        
     # if the command have wrong sintax we read until the
-    # the next tilde    
+    # the next tilde
+    rdc_next_tilde:
+        
+    end_rdc_next_tilde:
+    
     jr ra
   
 setup_rollinghashvect:
@@ -68,7 +103,7 @@ setup_rollinghashvect:
     sw t0, (12)s2
     li t0, 1172 # SSX
     sw t0, (16)s2
-    li t0, 1112 # SDX
+    li t0, 1112 # SDX 
     sw t0, (20)s2
     li t0, 2456 # SORT
     sw t0, (24)s2
@@ -90,6 +125,9 @@ ssx:
     
               
 # suite test
+
+test_add:
+    
 
 test_emptylist:
     lb t0, (0)s0
