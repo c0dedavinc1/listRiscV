@@ -1,12 +1,34 @@
-# listRiscV
+# LIST RISC V
 a project that creates a list and updates it with some command in RISC-V
+
+# Table of contents
+- [Task](#Task)
+- [Rolling hash](#Rolling_hash_table)
+
+# Read the next command
+- A) Reads all the empty space before the command 
+- B) Reads the command, or jumps it (if it isn't well-written); ex
+- C) Read until the next tilde.
+
 
 # Task
 started in 13/09/2025
 - [ ] Completing the test identifiers table
 - [ ] Writing about the functions in the program
 - [ ] Making a flowchart about the functions
-- [ ] Checking again the rolling hash calculations
+- [x] Checking again the rolling hash calculations
+
+# Rolling_hash_table
+| COMMAND      | Rolling hash           | 
+| ------------- |:-------------:| 
+| PRINT     | 4936 | 
+|   ADD    |    928   |   
+|  DEL |    972     |
+|  REV |   1104    |
+|  SSX|    1172    |
+|  SDX |   1112    |
+| SORT  |   2456    |
+
 
 # test identifiers
 | ID      | test           | 
@@ -19,10 +41,13 @@ started in 13/09/2025
 # Rolling hash (in this project)
 
 $$ R = (R + Dec(l)) << 2 $$ 
+
 For every l, letter, in the command.
 
 In math terms we would write
+
 $$ sum_{i=0}^n-1 r_i =  $$
+
 n the length of the command
 
 # Project-useful ASCII table
@@ -127,3 +152,5 @@ n the length of the command
 | 125 | 175 | 7D  | 01111101 | }      | &#125;      | &rcub;    | Closing brace                        |
 | 126 | 176 | 7E  | 01111110 | ~      | &#126;      | &tilde;   | Equivalency sign - tilde             |
 | 127 | 177 | 7F  | 01111111 | DEL    | &#127;      |           | Delete                               |
+
+# 
