@@ -17,6 +17,7 @@ started in 13/09/2025
 - [ ] Writing about the functions in the program
 - [ ] Making a flowchart about the functions
 - [x] Checking again the rolling hash calculations
+- [ ] Implementing the command ADD and testing it.
 
 # Rolling_hash_table
 | COMMAND      | Rolling hash           | 
