@@ -9,8 +9,8 @@ li s1, 1 # number of test
 
 main:
     # I create the list 
-    li s0, 0x10000000000
-    li s2, 0x11000000000 # this will be ad address of an array with the rolling hash of every command
+    li s0, 0x10000000
+    li s2, 0x11000000 # this will be ad address of an array with the rolling hash of every command
     
     addi sp, sp, -4
     sw ra, (0)sp
