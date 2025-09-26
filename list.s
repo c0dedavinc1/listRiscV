@@ -2,7 +2,7 @@
 testProf1: .string "  ADD(1) ~ ADD(a) ~ ADD(a) ~ ADD(B) ~ ADD(;) ~ ADD(9) ~SORT~PRINT~DEL(b) ~DEL(B)~PRI~REV~PRINT"
 testProf2: .string "ADD(1) ~ ADD(a) ~ add(B) ~ ADD(B) ~ ADD ~ ADD(9) ~PRINT~SORT(a)~PRINT~DEL(bb) ~DEL(B) ~PRINT~REV~PRINT"
 testAdd: .string "ADD(B)"
-testVoid: .string " "
+testVoid: .string "    "
 
 .text
 li s1, 1 # number of test 
@@ -70,7 +70,7 @@ read_next_command:
     # t3: to decide when the rdc until... stops
         
     mv t2, s3
-    # the for stops also with a parenthesis
+    # the for stops with a null space and with a parenthesis
     rdc_until_empty_space:
         beq t0, t1, end_rdc_until_empty_space
         
