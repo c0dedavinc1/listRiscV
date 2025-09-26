@@ -18,6 +18,8 @@ started in 13/09/2025
 - [ ] Making a flowchart about the functions
 - [x] Checking again the rolling hash calculations
 - [ ] Implementing the command ADD and testing it.
+- [ ] Design the software with some flowchart to guide the programmers.
+
 
 # Rolling_hash_table
 | COMMAND      | Rolling hash           | 
