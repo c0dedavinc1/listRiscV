@@ -10,6 +10,8 @@ a project that creates a list and updates it with some command in RISC-V
 - B) Reads the command, or jumps it (if it isn't well-written); ex
 - C) Read until the next tilde.
 
+![print](https://github.com/user-attachments/assets/22be904e-1466-434b-a08b-25792264ea6c)
+
 
 # Task
 started in 13/09/2025
