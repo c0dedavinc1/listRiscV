@@ -3,14 +3,15 @@ testProf1: .string "  ADD(1) ~ ADD(a) ~ ADD(a) ~ ADD(B) ~ ADD(;) ~ ADD(9) ~SORT~
 testProf2: .string "ADD(1) ~ ADD(a) ~ add(B) ~ ADD(B) ~ ADD ~ ADD(9) ~PRINT~SORT(a)~PRINT~DEL(bb) ~DEL(B) ~PRINT~REV~PRINT"
 testAdd: .string "ADD(B)"
 testVoid: .string "    "
+# test void by default has 3 empty space
 
 .text
 li s1, 1 # number of test 
 
 main:
     # I create the list 
-    li s0, 0x10000000
-    li s2, 0x11000000 # this will be ad address of an array with the rolling hash of every command
+    li s0, 0x10000000000
+    li s2, 0x11000000000 # this will be ad address of an array with the rolling hash of every command
     
     addi sp, sp, -4
     sw ra, (0)sp
@@ -59,25 +60,37 @@ read_next_command:
     # remember the list of commands: 
     # add, del, print, sort, rev, sdx, ssx
     
+    # t5, index where to start
+    mv t5, s3
+    
     # command reading stops with (an empty space) or a parentesis
     # then I'll have where it starts the command and where
     # it ends. I will control the command before, then the
     # parenthesis (obv if the command have it)
     
-    # t0:
-    # t1:
-    # t2: = s3
+    # t0: reading character
+    # t1: 32, empty character
+    # t2: = parenthesis
     # t3: to decide when the rdc until... stops
+    # In the first GiF of the problem is where that stops.
         
-    mv t2, s3
-    # the for stops with a null space and with a parenthesis
+    li t2, 40
+    li t1, 32
+    # The loop stops with empty character, 
+    # open parenthesis, end character
     rdc_until_empty_space:
         beq t0, t1, end_rdc_until_empty_space
+        beq t0, t2, end_rdc_until_empty_space
+        beq t0, zero, end_rdc_until_empty_space
+        
+        addi s3, s3, 1 # read the next character
+        add s4, s4, s3 
+        lb t0, (0)s4
         
         j rdc_until_empty_space
     end_rdc_until_empty_space:
-        
-    # checks if the command syntax     
+    
+    # checks if the command syntax is right
     command_hash:
            
     command_execute:
@@ -147,6 +160,8 @@ test_emptylist:
     
     jr ra
     
+# Testing if read until the first right character for 
+# command is okay.
 test_rnc_1:
     # first we need to save the ra
     addi sp, sp, -4
@@ -154,8 +169,8 @@ test_rnc_1:
     jal read_next_command
     lw ra, (0)sp
     addi sp, sp, 4
-    # at this point we know that s3 need to be 2
-    li a0, 2
+    # at this point we know that s3 need to be 3
+    li a0, 3
     mv a1, s3
     li a2, 114 # the test is identified with r
     
@@ -249,4 +264,6 @@ print_test:
     
     jr ra
  
+
+
 
