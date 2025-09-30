@@ -158,4 +158,7 @@ n the length of the command
 | 126 | 176 | 7E  | 01111110 | ~      | &#126;      | &tilde;   | Equivalency sign - tilde             |
 | 127 | 177 | 7F  | 01111111 | DEL    | &#127;      |           | Delete                               |
 
-# 
+# Test suite (how it works)
+
+<img width="5400" height="7200" alt="test1" src="https://github.com/user-attachments/assets/12c86456-4c41-4db1-a57e-fb57894cb53f" />
+
