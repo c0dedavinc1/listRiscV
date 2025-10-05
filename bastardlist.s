@@ -1,11 +1,14 @@
 .data
 testProf1: .string "  ADD(1) ~ ADD(a) ~ ADD(a) ~ ADD(B) ~ ADD(;) ~ ADD(9) ~SORT~PRINT~DEL(b) ~DEL(B)~PRI~REV~PRINT"
 testProf2: .string "ADD(1) ~ ADD(a) ~ add(B) ~ ADD(B) ~ ADD ~ ADD(9) ~PRINT~SORT(a)~PRINT~DEL(bb) ~DEL(B) ~PRINT~REV~PRINT"
-testAdd: .string "ADD(B)"
+testAdd: .string "ADD(B)    ~  "
 testVoid: .string "    "
 # test void by default has 3 empty space
 
+
+
 .text
+li s11, 0 # register used for testing stuff
 li s1, 1 # number of test 
 
 main:
@@ -38,6 +41,10 @@ main:
     # The last part, when all the test are ok
     # will be executing the two test that are passed.
     
+    # This will test the fact that we can read one command
+    li s3, 0 # before every test we need to restart the counter of command string
+    # because is a new string
+    jal test_add_1
     
      
     # Terminate program 
@@ -71,13 +78,14 @@ read_next_command:
     # t0: reading character
     # t1: 32, empty character
     # t2: = parenthesis
-    # t3: to decide when the rdc until... stops
     # In the first GiF of the problem is where that stops.
         
     li t2, 40
     li t1, 32
     # The loop stops with empty character, 
     # open parenthesis, end character
+    
+    mv t3, s3 # that is the start of the command
     rdc_until_empty_space:
         beq t0, t1, end_rdc_until_empty_space
         beq t0, t2, end_rdc_until_empty_space
@@ -89,6 +97,9 @@ read_next_command:
         
         j rdc_until_empty_space
     end_rdc_until_empty_space:
+    #t3: the start of the command
+    #t4: the end of command
+    add s11, t3, s3 # this is a register used for testing 
     
     # checks if the command syntax is right
     command_hash:
@@ -139,9 +150,29 @@ ssx:
               
 # suite test
 
-test_add:
+# This will test the fact we can read a command without checking if
+# it is right.
+test_add_1:
+    addi sp, sp, -4
+    sw ra, (0)sp
+    jal read_next_command
+    lw ra, (0)sp
+    addi sp, sp, 4
     
-
+    li a0, 2 # the sum of the end and the start (0+2)
+    mv a1, s11 # 
+    li a2, 97 # the identifier of the test (a)
+    
+    addi sp, sp, -4 # protocol for a nested function call
+    sw ra, (0)sp   
+    jal print_test   
+    lw ra, (0)sp
+    addi sp, sp, 4
+    
+    li s11, 0
+    
+    jr ra
+    
 test_emptylist:
     lb t0, (0)s0
     lw t1, (1)s0

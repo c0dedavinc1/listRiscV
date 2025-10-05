@@ -42,6 +42,8 @@ main:
     # will be executing the two test that are passed.
     
     # This will test the fact that we can read one command
+    li s3, 0 # before every test we need to restart the counter of command string
+    # because is a new string
     jal test_add_1
     
      
@@ -97,7 +99,7 @@ read_next_command:
     end_rdc_until_empty_space:
     #t3: the start of the command
     #t4: the end of command
-    add s11, t3, t4 # this is a register used for testing 
+    add s11, t3, s3 # this is a register used for testing 
     
     # checks if the command syntax is right
     command_hash:
@@ -166,6 +168,8 @@ test_add_1:
     jal print_test   
     lw ra, (0)sp
     addi sp, sp, 4
+    
+    li s11, 0
     
     jr ra
     
@@ -291,4 +295,6 @@ print_test:
     
     jr ra
  
+
+
 
